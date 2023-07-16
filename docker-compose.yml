@@ -11,7 +11,7 @@ services:
       - "5555:5555"
     volumes:
       - ./project/:/main
-    command: sh -c "npx prisma db push && npx prisma generate && yarn install && nest start --watch"
+    command: sh -c "npx prisma db push && yarn install && nest start --watch"
     depends_on:
       - "postgres"
   postgres:
