@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  dp_project:
+    tty: true
+    container_name: dp_project
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    volumes:
+      - ./project/:/main
+    command: sh -c "npx prisma db push && npx prisma generate && yarn install && nest start --watch"
+    depends_on:
+      - "postgres"
+  postgres:
+    container_name: postgres
+    tty: true
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123!
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped

@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres123!@postgres:5432/postgres?sslmode=disable"
+}
+
+model user {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
